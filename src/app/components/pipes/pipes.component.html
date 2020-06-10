@@ -32,3 +32,6 @@
 指数： <input type="text" [(ngModel)]="top">
 
 结果:{{bottom | pipes: top}}
+
+<h1>非纯 AsyncPipe</h1>
+<p>{{message$ | async}}</p>

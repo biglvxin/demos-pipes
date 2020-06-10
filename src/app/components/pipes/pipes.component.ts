@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
+import { interval } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pipes',
@@ -16,9 +19,24 @@ export class PipesComponent implements OnInit {
   };
   bottom = 2;
   top = 10;
+  message$: Observable<string>;
+
+  private messages = [
+    'You are my hero!',
+    'You are the best hero!',
+    'Will you be my hero?'
+  ];
+
   constructor() {
+    this.resend();
   }
   ngOnInit() {
+  }
+  resend() {
+    this.message$ = interval(500).pipe(
+      map(i => this.messages[i]),
+      take(this.messages.length)
+    );
   }
 
 }
